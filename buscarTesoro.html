@@ -1,0 +1,104 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <title>El tesoro escondido!</title>
+  </head>
+
+  <body>
+      <h1 id="titulo">Encuentre el tesoro escondido!</h1>
+
+      <img id="mapa" ancho=400 alto=400  
+       src="http://nostarch.com/images/treasuremap.png">
+      <!-- <br><input id="boton" type="button" value="Jugar de nuevo"> -->
+
+      <p id="distancia"></p>
+      <h3 id="mensaje"></h3>
+
+      <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+      <script>
+    // Encuentre un numero al azar entre 0 y valor
+  var numeroAzar = function (valor) {
+     return Math.floor(Math.random() * valor);
+};
+
+// Calcule distancia entre click event y tesoro
+var traedistancia = function (event, tesoro) {
+  var diffX = event.offsetX - tesoro.x;
+  var diffY = event.offsetY - tesoro.y;
+  return Math.sqrt((diffX * diffX) + (diffY * diffY));
+};
+
+// Genere un string representando la diferencia
+var traeAyuda = function (distancia) {
+  if (distancia < 15) {
+    
+   
+
+    alert("Encontraste el tesoro en " + clicks + " clicks!");
+$("#mensaje").html("Encontraste el tesoro!!!<br>El tesoro estaba en las coordenadas <br>X: "+tesoro.x +"<br>Y: "+tesoro.y);
+//<button>Volver a jugar</button>
+    }else
+ 
+  if (distancia < 18) {
+     $("#mensaje").html("Quemando!");
+      return $mensaje;
+
+    } else if (distancia < 20) {
+       $("#mensaje").html("Muy Caliente!");
+      return $mensaje;
+    } else if (distancia < 40) {
+       $("#mensaje").html("Caliente!");
+      return $mensaje;
+    } else if (distancia < 80) {
+
+       $("#mensaje").html("Tibio!");
+      return $mensaje;
+
+    } else if (distancia < 160) {
+       $("#mensaje").html("Frío!");
+      return $mensaje;
+    } else if (distancia < 320) {
+       $("#mensaje").html("Muy Frío!");
+      return $mensaje;
+    } else {
+      $("#mensaje").html("Congelado!");
+      return $mensaje;
+    }
+  };
+
+  // Crea variables
+ var ancho = 400;
+  var alto = 400;
+  var clicks = 0;
+
+  // Crea la ubicación del tesoro
+ var tesoro = {
+    x: numeroAzar(ancho),
+    y: numeroAzar(alto)
+  };
+
+  // Agrega el menejo de clicks
+ $("#mapa").click(function (event) {
+    clicks++;
+
+    // Calcula distancia entre el click y el tesoro
+   var distancia = traedistancia(event, tesoro);
+    // Convierte la distancia en ayuda
+   var ayuda = traeAyuda(distancia);
+
+    // Actualizar el elemento #distancia
+   $("#distancia").text(ayuda);
+
+    // Si está muy cerca dile que ganó, encontró el tesoro!
+   //if (distancia < 15) {
+    //alert("Encontraste el tesoro en " + clicks + " clicks!");
+    //$("#mensaje").html("El tesoro estaba en las coordenadas <br>X: "+tesoro.x +"<br>Y: "+tesoro.y);
+    //}
+
+  });
+         
+      </script>
+      
+   </body>
+   </html>
